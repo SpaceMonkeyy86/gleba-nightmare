@@ -1,7 +1,7 @@
 -- Override gleba's data script with our own
 APS.add_planet({
     name = "gleba",
-    filename = "__the-art-of-glebbing__/gleba.lua",
+    filename = "__roots-of-chaos__/gleba.lua",
     technology = "planet-discovery-gleba"
 })
 
@@ -19,7 +19,7 @@ end
 data:extend{{
     type = "technology",
     name = "chemistry",
-    icon = "__the-art-of-glebbing__/sprite/chemistry.png",
+    icon = "__roots-of-chaos__/sprite/chemistry.png",
     icon_size = 512,
     prerequisites = {"fluid-handling"},
     effects = {
