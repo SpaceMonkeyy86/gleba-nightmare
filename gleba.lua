@@ -19,6 +19,13 @@ function utils.add_packs(name, packs)
     end
 end
 
+function utils.add_effects(name, new_effects)
+    local effects = data.raw["technology"][name].effects
+    for _, effect in pairs(new_effects) do
+        effects[#effects+1] = effect
+    end
+end
+
 -- Agriculture requires landfill and steel
 utils.remove_packs("landfill", {"logistic-science-pack"})
 utils.set_prerequisites("landfill", {"automation-science-pack"})
@@ -42,7 +49,7 @@ utils.add_packs("plastics", {"agricultural-science-pack"})
 utils.add_recipes("rocket-fuel", {"rocket-fuel-from-jelly"})
 utils.add_packs("rocket-fuel", {"agricultural-science-pack"})
 
-utils.add_recipes("sulfur-processing", {"biosulfur"})
+utils.add_recipes("sulfur-processing", {"biosulfur", "coal-synthesis"})
 utils.set_prerequisites("sulfur-processing", {"chemistry", "agricultural-science-pack"})
 utils.add_packs("sulfur-processing", {"agricultural-science-pack"})
 
@@ -125,6 +132,7 @@ utils.add_packs("quality-module", {"agricultural-science-pack"})
 utils.add_packs("productivity-module-2", {"agricultural-science-pack"})
 utils.add_packs("speed-module-2", {"agricultural-science-pack"})
 utils.add_packs("efficiency-module-2", {"agricultural-science-pack"})
+utils.add_packs("quality-module-2", {"agricultural-science-pack"})
 utils.add_packs("military-2", {"agricultural-science-pack"})
 utils.add_packs("gate", {"agricultural-science-pack"})
 utils.add_packs("flammables", {"agricultural-science-pack"})
@@ -226,6 +234,13 @@ utils.add_packs("research-speed-3", {"agricultural-science-pack"})
 utils.add_packs("research-speed-4", {"agricultural-science-pack"})
 utils.add_packs("research-speed-5", {"agricultural-science-pack"})
 utils.add_packs("research-speed-6", {"agricultural-science-pack"})
+utils.add_packs("worker-robots-speed-1", {"agricultural-science-pack"})
+utils.add_packs("worker-robots-speed-2", {"agricultural-science-pack"})
+utils.add_packs("worker-robots-speed-3", {"agricultural-science-pack"})
+utils.add_packs("worker-robots-speed-4", {"agricultural-science-pack"})
+utils.add_packs("worker-robots-speed-5", {"agricultural-science-pack"})
+utils.add_packs("worker-robots-speed-6", {"agricultural-science-pack"})
+utils.add_packs("worker-robots-speed-7", {"agricultural-science-pack"})
 utils.add_packs("worker-robots-storage-1", {"agricultural-science-pack"})
 utils.add_packs("worker-robots-storage-2", {"agricultural-science-pack"})
 utils.add_packs("worker-robots-storage-3", {"agricultural-science-pack"})
@@ -292,4 +307,40 @@ utils.set_unit("artificial-soil", {
         {"automation-science-pack", 1},
         {"agricultural-science-pack", 1}
     }
+})
+
+-- Adjust nauvis techs to be more like the other planetary techs
+utils.remove_tech("uranium-mining", false, true)
+utils.add_effects("planet-discovery-nauvis", {
+    {
+        type = "mining-with-fluid",
+        modifier = true
+    }
+})
+utils.set_trigger("nuclear-power", {
+    type = "craft-item",
+    item = "uranium-235",
+    count = 1
+})
+utils.set_trigger("kovarex-enrichment-process", {
+    type = "craft-item",
+    item = "uranium-235",
+    count = 40
+})
+utils.set_trigger("nuclear-fuel-reprocessing", {
+    type = "craft-item",
+    item = "depleted-uranium-fuel-cell",
+    count = 5
+})
+utils.add_packs("uranium-ammo", {"space-science-pack"})
+utils.add_packs("fission-reactor-equipment", {"space-science-pack"})
+utils.add_packs("spidertron", {"space-science-pack"})
+utils.set_trigger("tree-seeding", {
+    type = "mine-entity",
+    entity = "dry-tree"
+})
+utils.set_prerequisites("fish-breeding", {"planet-discovery-nauvis"})
+utils.set_trigger("fish-breeding", {
+    type = "mine-entity",
+    entity = "fish"
 })

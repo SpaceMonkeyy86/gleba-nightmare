@@ -5,7 +5,7 @@ APS.add_planet({
     technology = "planet-discovery-gleba"
 })
 
--- Add new chemistry tech for chemical plants and coal synthesis
+-- Add new chemistry tech for chemical plants
 data:extend{{
     type = "technology",
     name = "chemistry",
@@ -16,10 +16,6 @@ data:extend{{
         {
             type = "unlock-recipe",
             recipe = "chemical-plant"
-        },
-        {
-            type = "unlock-recipe",
-            recipe = "coal-synthesis"
         }
     },
     unit = {
@@ -31,3 +27,6 @@ data:extend{{
         }
     }
 }}
+
+-- Reorder science packs so agricultural is directly after logistic
+data.raw["tool"]["agricultural-science-pack"].order = "b[logistic-science-pack]-a[agricultural-science-pack]"
