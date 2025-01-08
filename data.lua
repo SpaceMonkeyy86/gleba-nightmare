@@ -5,16 +5,6 @@ APS.add_planet({
     technology = "planet-discovery-gleba"
 })
 
--- Save vanilla asteroid definitions to reset them later
-VanillaPlanetAsteroids = {}
-for name, planet in pairs(data.raw["planet"]) do
-    VanillaPlanetAsteroids[name] = table.deepcopy(planet.asteroid_spawn_definitions)
-end
-VanillaConnectionAsteroids = {}
-for name, connection in pairs(data.raw["space-connection"]) do
-    VanillaConnectionAsteroids[name] = table.deepcopy(connection.asteroid_spawn_definitions)
-end
-
 -- Add new chemistry tech for chemical plants and coal synthesis
 data:extend{{
     type = "technology",
