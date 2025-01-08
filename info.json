@@ -1,0 +1,9 @@
+{
+    "name": "the-art-of-glebbing",
+    "version": "0.1.0",
+    "title": "The Art of Glebbing",
+    "author": "SpaceMonkeyy",
+    "factorio_version": "2.0",
+    "dependencies": ["base >= 2.0", "space-age", "any-planet-start >= 1.1.5"],
+    "description": "Start with nothing on Gleba and work through a modified tech tree while dealing with the planet's unique challenges."
+  }
