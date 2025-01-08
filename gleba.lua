@@ -50,6 +50,7 @@ utils.remove_packs("toolbelt-equipment", {"space-science-pack"})
 -- Oil processing is moved to space science so that it is available before heading to another planet
 utils.add_prerequisites("oil-gathering", {"space-science-pack"})
 utils.add_packs("oil-gathering", {"space-science-pack"})
+utils.remove_recipes("oil-processing", {"chemical-plant"})
 utils.set_unit("oil-processing", {
     time = 30,
     count = 50,
