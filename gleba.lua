@@ -28,7 +28,7 @@ end
 
 -- Agriculture requires landfill and steel
 utils.remove_packs("landfill", {"logistic-science-pack"})
-utils.set_prerequisites("landfill", {"automation-science-pack"})
+utils.set_prerequisites("landfill", {"electric-mining-drill"})
 utils.set_prerequisites("agriculture", {"automation-science-pack", "steel-processing", "landfill"})
 
 -- Heating tower requires concrete and steel
@@ -83,6 +83,9 @@ utils.set_unit("oil-processing", {
 })
 utils.set_prerequisites("advanced-oil-processing", {"oil-processing"})
 utils.add_packs("advanced-oil-processing", {"production-science-pack", "utility-science-pack", "space-science-pack"})
+utils.add_prerequisites("planet-discovery-vulcanus", {"advanced-oil-processing"})
+utils.add_prerequisites("planet-discovery-fulgora", {"advanced-oil-processing"})
+utils.add_prerequisites("planet-discovery-nauvis", {"advanced-oil-processing"})
 
 -- Coal synthesis is available earlier and chemical products don't require oil
 utils.remove_recipes("rocket-turret", {"coal-synthesis"})
@@ -112,9 +115,6 @@ utils.set_prerequisites("rocket-silo", {
     "electric-energy-distribution-2",
     "stack-inserter"
 })
-utils.add_prerequisites("planet-discovery-vulcanus", {"advanced-oil-processing"})
-utils.add_prerequisites("planet-discovery-fulgora", {"advanced-oil-processing"})
-utils.add_prerequisites("planet-discovery-nauvis", {"advanced-oil-processing"})
 
 -- Some techs require utility science, making it more useful
 utils.add_packs("advanced-combinators", {"utility-science-pack"})
@@ -315,12 +315,10 @@ utils.set_unit("artificial-soil", {
 })
 
 -- Adjust nauvis techs to be more like the other planetary techs
-utils.remove_tech("uranium-mining", false, true)
-utils.add_effects("planet-discovery-nauvis", {
-    {
-        type = "mining-with-fluid",
-        modifier = true
-    }
+utils.set_trigger("uranium-mining", {
+    type = "craft-item",
+    item = "electric-mining-drill",
+    count = 100
 })
 utils.set_trigger("nuclear-power", {
     type = "craft-item",
