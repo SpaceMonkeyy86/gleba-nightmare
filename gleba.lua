@@ -67,7 +67,7 @@ utils.remove_packs("toolbelt-equipment", {"space-science-pack"})
 
 -- Oil processing is moved to space science so that it is available before heading to another planet
 utils.add_prerequisites("oil-gathering", {"space-science-pack"})
-utils.add_packs("oil-gathering", {"space-science-pack"})
+utils.add_packs("oil-gathering", {"chemical-science-pack", "production-science-pack", "utility-science-pack", "space-science-pack"})
 utils.remove_recipes("oil-processing", {"chemical-plant"})
 utils.set_unit("oil-processing", {
     time = 30,
@@ -76,11 +76,13 @@ utils.set_unit("oil-processing", {
         {"automation-science-pack", 1},
         {"logistic-science-pack", 1},
         {"chemical-science-pack", 1},
+        {"production-science-pack", 1},
+        {"utility-science-pack", 1},
         {"space-science-pack", 1}
     }
 })
 utils.set_prerequisites("advanced-oil-processing", {"oil-processing"})
-utils.add_packs("advanced-oil-processing", {"space-science-pack"})
+utils.add_packs("advanced-oil-processing", {"production-science-pack", "utility-science-pack", "space-science-pack"})
 
 -- Coal synthesis is available earlier and chemical products don't require oil
 utils.remove_recipes("rocket-turret", {"coal-synthesis"})
@@ -110,6 +112,9 @@ utils.set_prerequisites("rocket-silo", {
     "electric-energy-distribution-2",
     "stack-inserter"
 })
+utils.add_prerequisites("planet-discovery-vulcanus", {"advanced-oil-processing"})
+utils.add_prerequisites("planet-discovery-fulgora", {"advanced-oil-processing"})
+utils.add_prerequisites("planet-discovery-nauvis", {"advanced-oil-processing"})
 
 -- Some techs require utility science, making it more useful
 utils.add_packs("advanced-combinators", {"utility-science-pack"})
