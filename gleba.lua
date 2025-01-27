@@ -95,9 +95,9 @@ utils.set_prerequisites("lubricant", {"chemical-science-pack"})
 utils.set_prerequisites("flammables", {"chemistry"})
 
 -- Rocket silo buffs (cry about it)
-utils.add_packs("rocket-silo", {"production-science-pack", "utility-science-pack"})
+utils.add_packs("rocket-silo", {"military-science-pack", "production-science-pack", "utility-science-pack"})
 utils.add_packs("logistic-system", {"production-science-pack", "utility-science-pack"})
-utils.add_packs("space-platform-thruster", {"production-science-pack", "utility-science-pack"})
+utils.add_packs("space-platform-thruster", {"military-science-pack", "production-science-pack", "utility-science-pack"})
 utils.add_packs("planet-discovery-vulcanus", {"production-science-pack", "utility-science-pack"})
 utils.add_packs("planet-discovery-fulgora", {"production-science-pack", "utility-science-pack"})
 utils.add_packs("planet-discovery-nauvis", {"production-science-pack", "utility-science-pack"})
@@ -121,6 +121,13 @@ utils.add_packs("advanced-combinators", {"utility-science-pack"})
 utils.set_prerequisites("advanced-combinators", {"circuit-network", "utility-science-pack"})
 utils.add_packs("electric-energy-distribution-2", {"utility-science-pack"})
 utils.set_prerequisites("electric-energy-distribution-2", {"electric-energy-distribution-1", "utility-science-pack"})
+
+-- Bots are harder to get
+utils.add_packs("constrction-robotics", {"production-science-pack"})
+utils.add_prerequisites("construction-robotics", {"production-science-pack"})
+utils.add_packs("personal-roboport", {"production-science-pack"})
+utils.add_packs("logistic-robotics", {"utility-science-pack"})
+utils.set_prerequisites("logistic-robotics", {"utility-science-pack"})
 
 -- Many techs also require agricultural science
 utils.add_packs("advanced-circuit", {"agricultural-science-pack"})
@@ -292,7 +299,7 @@ utils.set_unit("bioflux", {
 })
 utils.set_unit("agricultural-science-pack", {
     time = 30,
-    count = 100,
+    count = 200,
     ingredients = {
         {"automation-science-pack", 1}
     }
