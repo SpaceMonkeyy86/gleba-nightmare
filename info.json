@@ -1,7 +1,7 @@
 {
-    "name": "roots-of-chaos",
+    "name": "overgrowth",
     "version": "0.4.0",
-    "title": "Roots of Chaos",
+    "title": "Overgrowth",
     "author": "SpaceMonkeyy",
     "factorio_version": "2.0",
     "dependencies": ["base >= 2.0", "space-age", "any-planet-start >= 1.1.5"],

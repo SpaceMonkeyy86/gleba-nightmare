@@ -39,7 +39,7 @@ utils.set_prerequisites("agricultural-science-pack", {"bioflux"})
 utils.set_prerequisites("bacteria-cultivation", {"agricultural-science-pack"})
 utils.set_prerequisites("artificial-soil", {"agricultural-science-pack"})
 
--- Bioflux processing is removed and each recipe is moved into the respective vanilla tech
+-- Bioflux processing is removed and each recipe is now in the respective vanilla tech
 utils.remove_tech("bioflux-processing", false, true)
 
 utils.add_recipes("plastics", {"bioplastic"})
@@ -59,13 +59,12 @@ utils.add_packs("lubricant", {"agricultural-science-pack"})
 -- Carbon fiber and its successors no longer require space science
 utils.remove_packs("carbon-fiber", {"chemical-science-pack", "space-science-pack"})
 utils.remove_packs("rocket-turret", {"space-science-pack"})
-utils.remove_packs("spidertron", {"space-science-pack"})
 utils.remove_packs("stack-inserter", {"space-science-pack"})
 utils.remove_packs("transport-belt-capacity-1", {"space-science-pack"})
 utils.remove_packs("transport-belt-capacity-2", {"space-science-pack"})
 utils.remove_packs("toolbelt-equipment", {"space-science-pack"})
 
--- Oil processing is moved to space science so that it is available before heading to another planet
+-- Oil processing is now in space science so that it is available before heading to another planet
 utils.add_prerequisites("oil-gathering", {"space-science-pack"})
 utils.add_packs("oil-gathering", {"chemical-science-pack", "production-science-pack", "utility-science-pack", "space-science-pack"})
 utils.remove_recipes("oil-processing", {"chemical-plant"})
@@ -108,26 +107,19 @@ utils.set_prerequisites("rocket-silo", {
     "logistic-robotics",
     "rocketry",
     "automation-3",
-    "logistics-3",
     "effect-transmission",
-    "military-4",
-    "advanced-combinators",
-    "electric-energy-distribution-2",
     "stack-inserter"
 })
 
--- Some techs require utility science, making it more useful
-utils.add_packs("advanced-combinators", {"utility-science-pack"})
-utils.set_prerequisites("advanced-combinators", {"circuit-network", "utility-science-pack"})
-utils.add_packs("electric-energy-distribution-2", {"utility-science-pack"})
-utils.set_prerequisites("electric-energy-distribution-2", {"electric-energy-distribution-1", "utility-science-pack"})
-
--- Bots are harder to get
-utils.add_packs("constrction-robotics", {"production-science-pack"})
-utils.add_prerequisites("construction-robotics", {"production-science-pack"})
-utils.add_packs("personal-roboport", {"production-science-pack"})
-utils.add_packs("logistic-robotics", {"utility-science-pack"})
-utils.set_prerequisites("logistic-robotics", {"utility-science-pack"})
+-- Remove space science requirement from some techs because I'm feeling generous today
+utils.remove_packs("logistic-system", {"space-science-pack"})
+utils.set_prerequisites("logistic-system", {"logistic-robotics", "production-science-pack", "utility-science-pack"})
+utils.remove_packs("productivity-module-2", {"space-science-pack"})
+utils.set_prerequisites("productivity-module-2", {"productivity-module", "chemical-science-pack"})
+utils.remove_packs("speed-module-2", {"space-science-pack"})
+utils.set_prerequisites("speed-module-2", {"speed-module", "chemical-science-pack"})
+utils.remove_packs("efficiency-module-2", {"space-science-pack"})
+utils.set_prerequisites("efficiency-module-2", {"efficiency-module", "chemical-science-pack"})
 
 -- Many techs also require agricultural science
 utils.add_packs("advanced-circuit", {"agricultural-science-pack"})
@@ -140,11 +132,9 @@ utils.add_packs("modules", {"agricultural-science-pack"})
 utils.add_packs("productivity-module", {"agricultural-science-pack"})
 utils.add_packs("speed-module", {"agricultural-science-pack"})
 utils.add_packs("efficiency-module", {"agricultural-science-pack"})
-utils.add_packs("quality-module", {"agricultural-science-pack"})
 utils.add_packs("productivity-module-2", {"agricultural-science-pack"})
 utils.add_packs("speed-module-2", {"agricultural-science-pack"})
 utils.add_packs("efficiency-module-2", {"agricultural-science-pack"})
-utils.add_packs("quality-module-2", {"agricultural-science-pack"})
 utils.add_packs("military-2", {"agricultural-science-pack"})
 utils.add_packs("gate", {"agricultural-science-pack"})
 utils.add_packs("flammables", {"agricultural-science-pack"})
@@ -184,7 +174,6 @@ utils.add_packs("logistic-robotics", {"agricultural-science-pack"})
 utils.add_packs("production-science-pack", {"agricultural-science-pack"})
 utils.add_packs("automation-3", {"agricultural-science-pack"})
 utils.add_packs("effect-transmission", {"agricultural-science-pack"})
-utils.add_packs("elevated-rail", {"agricultural-science-pack"})
 utils.add_packs("logistics-3", {"agricultural-science-pack"})
 utils.add_packs("utility-science-pack", {"agricultural-science-pack"})
 utils.add_packs("rocket-silo", {"agricultural-science-pack"})
@@ -260,6 +249,19 @@ utils.add_packs("electric-weapons-damage-1", {"agricultural-science-pack"})
 utils.add_packs("electric-weapons-damage-2", {"agricultural-science-pack"})
 utils.add_packs("electric-weapons-damage-3", {"agricultural-science-pack"})
 utils.add_packs("electric-weapons-damage-4", {"agricultural-science-pack"})
+
+-- Other expansion mods
+if data.raw["technology"]["elevated-rail"] ~= nil then
+    utils.add_packs("elevated-rail", {"agricultural-science-pack"})
+end
+if data.raw["technology"]["quality-module"] ~= nil then
+    utils.add_packs("quality-module", {"agricultural-science-pack"})
+    utils.add_packs("quality-module-2", {"agricultural-science-pack"})
+    utils.remove_packs("quality-module-2", {"space-science-pack"})
+    utils.set_prerequisites("quality-module-2", {"quality-module", "chemical-science-pack"})
+    utils.remove_packs("epic-quality", {"space-science-pack"})
+    data.raw["technology"]["epic-quality"].unit.count = 500
+end
 
 -- Missing prerequisites that are normally required to reach other planets
 utils.add_prerequisites("rocket-turret", {"processing-unit"})
@@ -344,7 +346,6 @@ utils.set_trigger("nuclear-fuel-reprocessing", {
 })
 utils.add_packs("uranium-ammo", {"space-science-pack"})
 utils.add_packs("fission-reactor-equipment", {"space-science-pack"})
-utils.add_packs("spidertron", {"space-science-pack"})
 utils.set_trigger("tree-seeding", {
     type = "mine-entity",
     entity = "dry-tree"
