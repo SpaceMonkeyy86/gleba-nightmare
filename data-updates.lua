@@ -62,26 +62,19 @@ utils.remove_packs("transport-belt-capacity-2", {"space-science-pack"})
 utils.remove_packs("toolbelt-equipment", {"space-science-pack"})
 
 -- Oil processing is now in space science so that it is available before heading to another planet
-utils.add_prerequisites("oil-gathering", {"space-science-pack"})
-utils.add_packs("oil-gathering", {"chemical-science-pack", "production-science-pack", "utility-science-pack", "space-science-pack"})
-utils.remove_recipes("oil-processing", {"chemical-plant"})
-utils.set_unit("oil-processing", {
-    time = 30,
-    count = 50,
-    ingredients = {
-        {"automation-science-pack", 1},
-        {"logistic-science-pack", 1},
-        {"chemical-science-pack", 1},
-        {"production-science-pack", 1},
-        {"utility-science-pack", 1},
-        {"space-science-pack", 1}
-    }
-})
-utils.set_prerequisites("advanced-oil-processing", {"oil-processing"})
+utils.remove_tech("oil-gathering", false, true)
+utils.add_recipes("planet-discovery-nauvis", {"pumpjack"})
+utils.add_recipes("planet-discovery-vulcanus", {"pumpjack"})
+utils.remove_recipes("calcite-processing", {"simple-coal-liquefaction"})
+utils.remove_recipes("advanced-oil-processing", {"advanced-oil-processing"})
+utils.insert_recipe("advanced-oil-processing", "simple-coal-liquefaction", 1)
+utils.insert_recipe("advanced-oil-processing", "oil-refinery", 1)
+utils.add_recipes("advanced-oil-processing", {"solid-fuel-from-petroleum-gas"})
+utils.set_prerequisites("advanced-oil-processing", {"advanced-asteroid-processing"})
 utils.add_packs("advanced-oil-processing", {"production-science-pack", "utility-science-pack", "space-science-pack"})
-utils.add_prerequisites("planet-discovery-vulcanus", {"advanced-oil-processing"})
-utils.add_prerequisites("planet-discovery-fulgora", {"advanced-oil-processing"})
-utils.add_prerequisites("planet-discovery-nauvis", {"advanced-oil-processing"})
+utils.remove_recipes("oil-processing", {"oil-refinery", "chemical-plant", "solid-fuel-from-petroleum-gas"})
+utils.add_recipes("oil-processing", {"advanced-oil-processing"})
+utils.set_prerequisites("oil-processing", {"planet-discovery-nauvis"})
 
 -- Coal synthesis is available earlier and chemical products don't require oil
 utils.remove_recipes("rocket-turret", {"coal-synthesis"})
@@ -92,11 +85,6 @@ utils.set_prerequisites("flammables", {"chemistry"})
 
 -- Rocket silo buffs (cry about it)
 utils.add_packs("rocket-silo", {"military-science-pack", "production-science-pack", "utility-science-pack"})
-utils.add_packs("logistic-system", {"production-science-pack", "utility-science-pack"})
-utils.add_packs("space-platform-thruster", {"military-science-pack", "production-science-pack", "utility-science-pack"})
-utils.add_packs("planet-discovery-vulcanus", {"production-science-pack", "utility-science-pack"})
-utils.add_packs("planet-discovery-fulgora", {"production-science-pack", "utility-science-pack"})
-utils.add_packs("planet-discovery-nauvis", {"production-science-pack", "utility-science-pack"})
 utils.set_prerequisites("rocket-silo", {
     "concrete",
     "advanced-material-processing-2",
@@ -107,6 +95,16 @@ utils.set_prerequisites("rocket-silo", {
     "effect-transmission",
     "stack-inserter"
 })
+utils.add_packs("logistic-system", {"production-science-pack", "utility-science-pack"})
+utils.set_prerequisites("space-platform-thruster", {"advanced-oil-processing"})
+utils.set_trigger("space-platform-thruster", {
+    type = "craft-item",
+    item = "solid-fuel",
+    count = 2400
+})
+utils.add_packs("planet-discovery-vulcanus", {"production-science-pack", "utility-science-pack"})
+utils.add_packs("planet-discovery-fulgora", {"production-science-pack", "utility-science-pack"})
+utils.add_packs("planet-discovery-nauvis", {"production-science-pack", "utility-science-pack"})
 
 -- Remove space science requirement from some techs because I'm feeling generous today
 utils.remove_packs("logistic-system", {"space-science-pack"})
@@ -189,7 +187,6 @@ utils.add_packs("logistics-3", {"agricultural-science-pack"})
 utils.add_packs("utility-science-pack", {"agricultural-science-pack"})
 utils.add_packs("rocket-silo", {"agricultural-science-pack"})
 utils.add_packs("logistic-system", {"agricultural-science-pack"})
-utils.add_packs("space-platform-thruster", {"agricultural-science-pack"})
 utils.add_packs("planet-discovery-vulcanus", {"agricultural-science-pack"})
 utils.add_packs("planet-discovery-fulgora", {"agricultural-science-pack"})
 utils.add_packs("planet-discovery-nauvis", {"agricultural-science-pack"})
@@ -277,8 +274,7 @@ end
 -- Missing prerequisites that are normally required to reach other planets
 utils.add_prerequisites("rocket-turret", {"processing-unit"})
 utils.set_prerequisites("advanced-asteroid-processing", {"space-science-pack"})
-utils.add_prerequisites("calcite-processing", {"advanced-oil-processing"})
-utils.add_prerequisites("flamethrower", {"oil-gathering"})
+utils.add_prerequisites("flamethrower", {"advanced-oil-processing"})
 utils.add_packs("flamethrower", {"space-science-pack"})
 utils.add_packs("refined-flammables-1", {"space-science-pack"})
 utils.add_packs("refined-flammables-2", {"space-science-pack"})
