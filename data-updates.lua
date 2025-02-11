@@ -71,7 +71,8 @@ utils.insert_recipe("advanced-oil-processing", "simple-coal-liquefaction", 1)
 utils.insert_recipe("advanced-oil-processing", "oil-refinery", 1)
 utils.add_recipes("advanced-oil-processing", {"solid-fuel-from-petroleum-gas"})
 utils.set_prerequisites("advanced-oil-processing", {"advanced-asteroid-processing"})
-utils.add_packs("advanced-oil-processing", {"production-science-pack", "utility-science-pack", "space-science-pack"})
+utils.add_packs("advanced-oil-processing", {"agricultural-science-pack", "production-science-pack", "utility-science-pack", "space-science-pack"})
+data.raw["technology"]["advanced-oil-processing"].unit.count = 3000
 utils.remove_recipes("oil-processing", {"oil-refinery", "chemical-plant", "solid-fuel-from-petroleum-gas"})
 utils.add_recipes("oil-processing", {"advanced-oil-processing"})
 utils.set_prerequisites("oil-processing", {"planet-discovery-nauvis"})
@@ -99,8 +100,8 @@ utils.add_packs("logistic-system", {"production-science-pack", "utility-science-
 utils.set_prerequisites("space-platform-thruster", {"advanced-oil-processing"})
 utils.set_trigger("space-platform-thruster", {
     type = "craft-item",
-    item = "solid-fuel",
-    count = 2400
+    item = "petroleum-gas-barrel",
+    count = 100
 })
 utils.add_packs("planet-discovery-vulcanus", {"production-science-pack", "utility-science-pack"})
 utils.add_packs("planet-discovery-fulgora", {"production-science-pack", "utility-science-pack"})
