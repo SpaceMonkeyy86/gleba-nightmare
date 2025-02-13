@@ -32,5 +32,5 @@ data:extend{{
 data.raw["tool"]["agricultural-science-pack"].order = "b[logistic-science-pack]-a[agricultural-science-pack]"
 
 -- Increase mining time for stromatolites by a lot
-data.raw["simple-entity"]["iron-stromatolite"].minable.mining_time = 30
-data.raw["simple-entity"]["copper-stromatolite"].minable.mining_time = 30
+data.raw["simple-entity"]["iron-stromatolite"].minable.mining_time = 40
+data.raw["simple-entity"]["copper-stromatolite"].minable.mining_time = 40
