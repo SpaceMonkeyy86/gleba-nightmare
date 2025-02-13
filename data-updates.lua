@@ -40,12 +40,19 @@ function utils.remove_prerequisites(name, prerequisites)
     end
 end
 
+-- Jellynut and yumako are farmable straight away
+utils.set_prerequisites("jellynut", {})
+utils.set_prerequisites("yumako", {})
+utils.set_prerequisites("steam-power", {"jellynut"})
+utils.set_prerequisites("electronics", {"yumako"})
+
 -- Agriculture requires landfill and steel
 utils.remove_packs("landfill", {"logistic-science-pack"})
 utils.set_prerequisites("landfill", {"electric-mining-drill"})
-utils.set_prerequisites("agriculture", {"automation-science-pack", "steel-processing", "landfill"})
+utils.set_prerequisites("agriculture", {"steel-processing", "landfill"})
+utils.set_prerequisites("biochamber", {"agriculture"})
 
--- Heating tower requires concrete and steel
+-- Heating tower requires concrete
 utils.set_prerequisites("heating-tower", {"concrete"})
 
 -- Agricultural science unlocks bacteria cultivation and artificial soil
