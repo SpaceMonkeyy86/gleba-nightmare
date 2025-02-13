@@ -23,13 +23,30 @@ function utils.add_effects(name, new_effects)
     end
 end
 
+function utils.set_count(name, count)
+    data.raw["technology"][name].unit.count = count
+end
+
+function utils.remove_prerequisites(name, prerequisites)
+    local map = {}
+    for _, prerequisite in pairs(prerequisites) do
+        map[prerequisite] = true
+    end
+    local prereqs = data.raw["technology"][name].prerequisites
+    for i = #prereqs, 1, -1 do
+        if map[prereqs[i]] then
+            table.remove(prereqs, i)
+        end
+    end
+end
+
 -- Agriculture requires landfill and steel
 utils.remove_packs("landfill", {"logistic-science-pack"})
 utils.set_prerequisites("landfill", {"electric-mining-drill"})
 utils.set_prerequisites("agriculture", {"automation-science-pack", "steel-processing", "landfill"})
 
 -- Heating tower requires concrete and steel
-utils.set_prerequisites("heating-tower", {"concrete", "steel-processing"})
+utils.set_prerequisites("heating-tower", {"concrete"})
 
 -- Agricultural science unlocks bacteria cultivation and artificial soil
 utils.set_prerequisites("agricultural-science-pack", {"bioflux"})
@@ -72,7 +89,7 @@ utils.insert_recipe("advanced-oil-processing", "oil-refinery", 1)
 utils.add_recipes("advanced-oil-processing", {"solid-fuel-from-petroleum-gas"})
 utils.set_prerequisites("advanced-oil-processing", {"advanced-asteroid-processing"})
 utils.add_packs("advanced-oil-processing", {"agricultural-science-pack", "production-science-pack", "utility-science-pack", "space-science-pack"})
-data.raw["technology"]["advanced-oil-processing"].unit.count = 3000
+utils.set_count("advanced-oil-processing", 3000)
 utils.remove_recipes("oil-processing", {"oil-refinery", "chemical-plant", "solid-fuel-from-petroleum-gas"})
 utils.add_recipes("oil-processing", {"advanced-oil-processing"})
 utils.set_prerequisites("oil-processing", {"planet-discovery-nauvis"})
@@ -269,7 +286,7 @@ if data.raw["technology"]["quality-module"] ~= nil then
     utils.remove_packs("quality-module-2", {"space-science-pack"})
     utils.set_prerequisites("quality-module-2", {"quality-module", "chemical-science-pack"})
     utils.remove_packs("epic-quality", {"space-science-pack"})
-    data.raw["technology"]["epic-quality"].unit.count = 1000
+    utils.set_count("epic-quality", 1000)
 end
 
 -- Missing prerequisites that are normally required to reach other planets
@@ -282,6 +299,10 @@ utils.add_packs("refined-flammables-2", {"space-science-pack"})
 utils.add_packs("refined-flammables-3", {"space-science-pack"})
 utils.add_packs("refined-flammables-4", {"space-science-pack"})
 utils.add_packs("refined-flammables-5", {"space-science-pack"})
+utils.add_prerequisites("efficiency-module-3", {"space-science-pack"})
+
+-- Trim unnecessary prerequisites for better mod support
+utils.remove_prerequisites("planet-discovery-aquilo", {"heating-tower"})
 
 -- Trigger techs are replaced with science pack requirements so more effort is needed to unlock them
 utils.set_unit("agriculture", {
