@@ -53,18 +53,19 @@ utils.set_prerequisites("agricultural-science-pack", {"bioflux"})
 utils.set_prerequisites("bacteria-cultivation", {"agricultural-science-pack"})
 utils.set_prerequisites("artificial-soil", {"agricultural-science-pack"})
 
--- Bioflux processing is removed and each recipe is now in the respective vanilla tech
-utils.remove_tech("bioflux-processing", false, true)
+-- Move each recipe in bioflux processing to the respective vanilla tech
+utils.set_prerequisites("bioflux-processing", {"agricultural-science-pack"})
+utils.remove_recipes("bioflux-processing", {"bioplastic", "biosulfur", "rocket-fuel-from-jelly", "biolubricant"})
 
 utils.add_recipes("plastics", {"bioplastic"})
-utils.set_prerequisites("plastics", {"chemistry", "agricultural-science-pack"})
+utils.set_prerequisites("plastics", {"chemistry", "bioflux-processing"})
 utils.add_packs("plastics", {"agricultural-science-pack"})
 
 utils.add_recipes("rocket-fuel", {"rocket-fuel-from-jelly"})
 utils.add_packs("rocket-fuel", {"agricultural-science-pack"})
 
 utils.add_recipes("sulfur-processing", {"biosulfur", "coal-synthesis"})
-utils.set_prerequisites("sulfur-processing", {"chemistry", "agricultural-science-pack"})
+utils.set_prerequisites("sulfur-processing", {"chemistry", "bioflux-processing"})
 utils.add_packs("sulfur-processing", {"agricultural-science-pack"})
 
 utils.add_recipes("lubricant", {"biolubricant"})
@@ -299,10 +300,19 @@ utils.add_packs("refined-flammables-2", {"space-science-pack"})
 utils.add_packs("refined-flammables-3", {"space-science-pack"})
 utils.add_packs("refined-flammables-4", {"space-science-pack"})
 utils.add_packs("refined-flammables-5", {"space-science-pack"})
-utils.add_prerequisites("efficiency-module-3", {"space-science-pack"})
+utils.set_prerequisites("efficiency-module-3", {"efficiency-module-2", "space-science-pack"})
 
--- Trim unnecessary prerequisites for better mod support
+-- Trim unnecessary prerequisites for better mod support (discovery tree)
 utils.remove_prerequisites("planet-discovery-aquilo", {"heating-tower"})
+utils.remove_prerequisites("captivity", {"agricultural-science-pack", {"rocketry"}})
+utils.remove_prerequisites("biolab", {"production-science-pack", "utility-science-pack"})
+utils.remove_prerequisites("overgrowth-soil", {"production-science-pack", "utility-science-pack"})
+utils.remove_prerequisites("health", {"agricultural-science-pack"})
+utils.remove_prerequisites("plastic-bar-productivity", {"agricultural-science-pack"})
+utils.remove_prerequisites("refined-flammables-7", {"agricultural-science-pack"})
+utils.remove_prerequisites("rocket-fuel-productivity", {"agricultural-science-pack"})
+utils.remove_prerequisites("stronger-explosives-7", {"agricultural-science-pack"})
+utils.remove_prerequisites("tree-seeding", {"agricultural-science-pack"})
 
 -- Trigger techs are replaced with science pack requirements so more effort is needed to unlock them
 utils.set_unit("agriculture", {
@@ -352,6 +362,14 @@ utils.set_unit("bacteria-cultivation", {
 utils.set_unit("artificial-soil", {
     time = 30,
     count = 300,
+    ingredients = {
+        {"automation-science-pack", 1},
+        {"agricultural-science-pack", 1}
+    }
+})
+utils.set_unit("bioflux-processing", {
+    time = 30,
+    count = 500,
     ingredients = {
         {"automation-science-pack", 1},
         {"agricultural-science-pack", 1}
