@@ -1,9 +1,9 @@
 {
-    "name": "overgrowth",
-    "version": "0.4.0",
-    "title": "Overgrowth",
+    "name": "gleba-nightmare",
+    "version": "0.1.0",
+    "title": "Gleba Nightmare",
     "author": "SpaceMonkeyy",
     "factorio_version": "2.0",
     "dependencies": ["base >= 2.0", "space-age", "any-planet-start >= 1.1.5"],
-    "description": "Start with nothing on Gleba and work through a modified tech tree while dealing with the planet's unique challenges."
+    "description": "A custom campaign where you start on Gleba and suffer. Deathworld recommended."
   }
