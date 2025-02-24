@@ -40,28 +40,60 @@ function utils.remove_prerequisites(name, prerequisites)
     end
 end
 
--- Jellynut and yumako are farmable straight away
+-- Jellynut and yumako are farmable straight away, and landfill is immediately unlockable
 utils.set_prerequisites("jellynut", {})
 utils.set_prerequisites("yumako", {})
 utils.set_prerequisites("steam-power", {"jellynut"})
 utils.set_prerequisites("electronics", {"yumako"})
+utils.set_prerequisites("landfill", {})
+utils.set_trigger("landfill", {
+    type = "mine-entity",
+    entity = "stone"
+})
 
--- Agriculture requires landfill and steel
-utils.remove_packs("landfill", {"logistic-science-pack"})
-utils.set_prerequisites("landfill", {"electric-mining-drill"})
-utils.set_prerequisites("agriculture", {"steel-processing", "landfill"})
-utils.set_prerequisites("biochamber", {"agriculture"})
-
--- Heating tower requires concrete
-utils.set_prerequisites("heating-tower", {"concrete"})
+-- Biochambers are available before agriculture
+utils.set_prerequisites("biochamber", {"electronics", "landfill"})
+utils.set_trigger("biochamber", {
+    type = "craft-item",
+    item = "landfill"
+})
+utils.remove_recipes("agriculture", {"nutrients-from-spoilage"})
+utils.insert_recipe("biochamber", "nutrients-from-spoilage", 2)
+utils.add_prerequisites("bioflux", {"jellynut"})
 
 -- Agricultural science unlocks bacteria cultivation and artificial soil
 utils.set_prerequisites("agricultural-science-pack", {"bioflux"})
+utils.set_trigger("agricultural-science-pack", {
+    type = "craft-item",
+    item = "bioflux",
+    count = 1
+})
 utils.set_prerequisites("bacteria-cultivation", {"agricultural-science-pack"})
+utils.set_unit("bacteria-cultivation", {
+    time = 10,
+    count = 30,
+    ingredients = {
+        {"agricultural-science-pack", 1}
+    }
+})
 utils.set_prerequisites("artificial-soil", {"agricultural-science-pack"})
+utils.set_unit("artificial-soil", {
+    time = 10,
+    count = 30,
+    ingredients = {
+        {"agricultural-science-pack", 1}
+    }
+})
 
 -- Move each recipe in bioflux processing to the respective vanilla tech
 utils.set_prerequisites("bioflux-processing", {"agricultural-science-pack"})
+utils.set_unit("bioflux-processing", {
+    time = 10,
+    count = 30,
+    ingredients = {
+        {"agricultural-science-pack", 1}
+    }
+})
 utils.remove_recipes("bioflux-processing", {"bioplastic", "biosulfur", "rocket-fuel-from-jelly", "biolubricant"})
 
 utils.add_recipes("plastics", {"bioplastic"})
@@ -77,6 +109,28 @@ utils.add_packs("sulfur-processing", {"agricultural-science-pack"})
 
 utils.add_recipes("lubricant", {"biolubricant"})
 utils.add_packs("lubricant", {"agricultural-science-pack"})
+
+-- Agriculture requires agricultural science and steel
+utils.set_prerequisites("agriculture", {"agricultural-science-pack", "steel-processing"})
+utils.set_unit("agriculture", {
+    time = 15,
+    count = 100,
+    ingredients = {
+        {"agricultural-science-pack", 1},
+        {"automation-science-pack", 1}
+    }
+})
+
+-- Heating tower requires concrete
+utils.set_prerequisites("heating-tower", {"concrete"})
+utils.set_unit("heating-tower", {
+    time = 30,
+    count = 300,
+    ingredients = {
+        {"automation-science-pack", 1},
+        {"logistic-science-pack", 1}
+    }
+})
 
 -- Carbon fiber and its successors no longer require space science
 utils.remove_packs("carbon-fiber", {"chemical-science-pack", "space-science-pack"})
@@ -320,68 +374,6 @@ utils.remove_prerequisites("refined-flammables-7", {"agricultural-science-pack"}
 utils.remove_prerequisites("rocket-fuel-productivity", {"agricultural-science-pack"})
 utils.remove_prerequisites("stronger-explosives-7", {"agricultural-science-pack"})
 utils.remove_prerequisites("tree-seeding", {"agricultural-science-pack"})
-
--- Trigger techs are replaced with science pack requirements so more effort is needed to unlock them
-utils.set_unit("agriculture", {
-    time = 30,
-    count = 100,
-    ingredients = {
-        {"automation-science-pack", 1}
-    }
-})
-utils.set_unit("heating-tower", {
-    time = 30,
-    count = 500,
-    ingredients = {
-        {"automation-science-pack", 1},
-        {"logistic-science-pack", 1}
-    }
-})
-utils.set_unit("biochamber", {
-    time = 30,
-    count = 150,
-    ingredients = {
-        {"automation-science-pack", 1}
-    }
-})
-utils.set_unit("bioflux", {
-    time = 30,
-    count = 150,
-    ingredients = {
-        {"automation-science-pack", 1}
-    }
-})
-utils.set_unit("agricultural-science-pack", {
-    time = 30,
-    count = 200,
-    ingredients = {
-        {"automation-science-pack", 1}
-    }
-})
-utils.set_unit("bacteria-cultivation", {
-    time = 30,
-    count = 500,
-    ingredients = {
-        {"automation-science-pack", 1},
-        {"agricultural-science-pack", 1}
-    }
-})
-utils.set_unit("artificial-soil", {
-    time = 30,
-    count = 300,
-    ingredients = {
-        {"automation-science-pack", 1},
-        {"agricultural-science-pack", 1}
-    }
-})
-utils.set_unit("bioflux-processing", {
-    time = 30,
-    count = 500,
-    ingredients = {
-        {"automation-science-pack", 1},
-        {"agricultural-science-pack", 1}
-    }
-})
 
 -- Adjust nauvis techs to be more like the other planetary techs
 utils.set_trigger("uranium-mining", {

@@ -28,9 +28,9 @@ data:extend{{
     }
 }}
 
--- Reorder science packs so agricultural is directly after logistic
-data.raw["tool"]["agricultural-science-pack"].order = "b[logistic-science-pack]-a[agricultural-science-pack]"
+-- Reorder science packs so agricultural is first
+data.raw["tool"]["agricultural-science-pack"].order = "A[agricultural-science-pack]"
 
--- Increase mining time for stromatolites by a lot
-data.raw["simple-entity"]["iron-stromatolite"].minable.mining_time = 40
-data.raw["simple-entity"]["copper-stromatolite"].minable.mining_time = 40
+-- Increase mining time for stromatolites
+data.raw["simple-entity"]["iron-stromatolite"].minable.mining_time = 1
+data.raw["simple-entity"]["copper-stromatolite"].minable.mining_time = 1
