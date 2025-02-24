@@ -364,7 +364,6 @@ utils.add_packs("refined-flammables-5", {"space-science-pack"})
 utils.set_prerequisites("efficiency-module-3", {"efficiency-module-2", "space-science-pack"})
 
 -- Trim unnecessary prerequisites for better mod support (discovery tree)
-utils.remove_prerequisites("planet-discovery-aquilo", {"heating-tower"})
 utils.remove_prerequisites("captivity", {"agricultural-science-pack", {"rocketry"}})
 utils.remove_prerequisites("biolab", {"production-science-pack", "utility-science-pack"})
 utils.remove_prerequisites("overgrowth-soil", {"production-science-pack", "utility-science-pack"})
