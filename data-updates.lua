@@ -62,7 +62,7 @@ utils.insert_recipe("biochamber", "nutrients-from-spoilage", 2)
 utils.add_prerequisites("bioflux", {"jellynut"})
 
 -- Agricultural science unlocks bacteria cultivation and artificial soil
-utils.set_prerequisites("agricultural-science-pack", {"bioflux"})
+utils.set_prerequisites("agricultural-science-pack", {"bioflux", "steam-power"})
 utils.set_trigger("agricultural-science-pack", {
     type = "craft-item",
     item = "bioflux",

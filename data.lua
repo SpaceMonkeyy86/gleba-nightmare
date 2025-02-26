@@ -6,11 +6,12 @@ APS.add_planet({
 })
 
 -- Add new chemistry tech for chemical plants
+local research_productivity = data.raw["technology"]["research-productivity"]
 data:extend{{
     type = "technology",
     name = "chemistry",
-    icon = "__gleba-nightmare__/sprite/chemistry.png",
-    icon_size = 512,
+    icon = research_productivity.icon,
+    icon_size = research_productivity.icon_size,
     prerequisites = {"fluid-handling"},
     effects = {
         {

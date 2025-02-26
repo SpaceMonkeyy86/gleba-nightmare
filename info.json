@@ -1,9 +1,9 @@
 {
-    "name": "gleba-nightmare",
-    "version": "0.1.1",
-    "title": "Gleba Nightmare",
-    "author": "SpaceMonkeyy",
-    "factorio_version": "2.0",
-    "dependencies": ["base >= 2.0", "space-age", "any-planet-start >= 1.1.5"],
-    "description": "A custom campaign where you start on Gleba and suffer. Deathworld recommended."
-  }
+  "name": "gleba-nightmare",
+  "version": "1.0.0",
+  "title": "Gleba Nightmare",
+  "author": "SpaceMonkeyy",
+  "factorio_version": "2.0",
+  "dependencies": ["base >= 2.0", "space-age", "any-planet-start >= 1.1"],
+  "description": "A custom campaign where you start on Gleba and suffer. This mod is built on Any Planet Start, and many additional changes to the tech tree were made to make it more difficult."
+}
